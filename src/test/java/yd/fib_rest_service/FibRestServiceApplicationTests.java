@@ -45,17 +45,20 @@ class FibRestServiceApplicationTests {
 
     @Test
     public void getNegativeFib() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/fibonacci/-5")).andExpect(status().isNotFound());
+        mvc.perform(MockMvcRequestBuilders.get("/fibonacci/-5")).andExpect(status().isBadRequest())
+                .andExpect(content().string(equalTo("In the path fibonacci/{n}, n must be greater than zero.")));
     }
 
     @Test
     public void getFibOfNotNumber() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/fibonacci/x")).andExpect(status().isNotFound());
+        mvc.perform(MockMvcRequestBuilders.get("/fibonacci/x")).andExpect(status().isBadRequest())
+                .andExpect(content().string(equalTo("In the path fibonacci/{n}, n must be a number of type int/long between 0 and 9,223,372,036,854,775,807")));
     }
 
     @Test
     public void getFibOfNonWholeNumber() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/fibonacci/1.5")).andExpect(status().isNotFound());
+        mvc.perform(MockMvcRequestBuilders.get("/fibonacci/1.5")).andExpect(status().isBadRequest())
+                .andExpect(content().string(equalTo("In the path fibonacci/{n}, n must be a number of type int/long between 0 and 9,223,372,036,854,775,807")));
     }
 
 }

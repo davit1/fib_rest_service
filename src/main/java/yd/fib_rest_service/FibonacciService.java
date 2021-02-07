@@ -8,7 +8,7 @@ import java.math.BigInteger;
 public class FibonacciService {
 
     public String genFib(long n) {
-        BigInteger arr1[][] = {{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
+        BigInteger[][] arr1 = {{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
         if (n == 0)
             return "0";
         else {
@@ -17,17 +17,17 @@ public class FibonacciService {
         }
     }
 
-    private void power(BigInteger arr1[][], long n) {
+    private void power(BigInteger[][] arr1, long n) {
         if (n == 0 || n == 1)
             return;
-        BigInteger arr2[][] = {{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
+        BigInteger[][] arr2 = {{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
         power(arr1, n / 2);
         multiply(arr1, arr1);
         if (n % 2 != 0)
             multiply(arr1, arr2);
     }
 
-    private void multiply(BigInteger arr1[][], BigInteger arr2[][]) {
+    private void multiply(BigInteger[][] arr1, BigInteger[][] arr2) {
         BigInteger x = (arr1[0][0].multiply(arr2[0][0])).add(arr1[0][1].multiply(arr2[1][0]));
         BigInteger y = (arr1[0][0].multiply(arr2[0][1])).add(arr1[0][1].multiply(arr2[1][1]));
         BigInteger z = (arr1[1][0].multiply(arr2[0][0])).add(arr1[1][1].multiply(arr2[1][0]));
