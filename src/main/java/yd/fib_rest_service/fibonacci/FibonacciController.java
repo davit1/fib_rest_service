@@ -1,21 +1,17 @@
-package yd.fib_rest_service;
+package yd.fib_rest_service.fibonacci;
 
 import org.springframework.beans.TypeMismatchException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FibonacciController {
 
-    @Autowired
-    FibonacciService fibonacciService;
-
     @GetMapping("/fibonacci/{n}")
     public String getFibonacciNumber(@PathVariable Long n) {
         if (n < 0)
             throw new NegativeFibException();
-        return fibonacciService.genFib(n);
+        return FibonacciService.genFib(n);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

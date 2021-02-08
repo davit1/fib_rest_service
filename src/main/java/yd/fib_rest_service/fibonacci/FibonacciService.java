@@ -1,13 +1,12 @@
-package yd.fib_rest_service;
-
-import org.springframework.stereotype.Service;
+package yd.fib_rest_service.fibonacci;
 
 import java.math.BigInteger;
 
-@Service
 public class FibonacciService {
 
-    public String genFib(long n) {
+    private FibonacciService() {}
+
+    public static String genFib(long n) {
         BigInteger[][] arr1 = {{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
         if (n == 0)
             return "0";
@@ -17,7 +16,7 @@ public class FibonacciService {
         }
     }
 
-    private void power(BigInteger[][] arr1, long n) {
+    private static void power(BigInteger[][] arr1, long n) {
         if (n == 0 || n == 1)
             return;
         BigInteger[][] arr2 = {{BigInteger.ONE, BigInteger.ONE}, {BigInteger.ONE, BigInteger.ZERO}};
@@ -27,7 +26,7 @@ public class FibonacciService {
             multiply(arr1, arr2);
     }
 
-    private void multiply(BigInteger[][] arr1, BigInteger[][] arr2) {
+    private static void multiply(BigInteger[][] arr1, BigInteger[][] arr2) {
         BigInteger x = (arr1[0][0].multiply(arr2[0][0])).add(arr1[0][1].multiply(arr2[1][0]));
         BigInteger y = (arr1[0][0].multiply(arr2[0][1])).add(arr1[0][1].multiply(arr2[1][1]));
         BigInteger z = (arr1[1][0].multiply(arr2[0][0])).add(arr1[1][1].multiply(arr2[1][0]));
